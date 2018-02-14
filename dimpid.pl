@@ -18,7 +18,9 @@ use constant GREY => '14';
 Irssi::signal_add('message public', sub {
 	my ($server, $text, $nick, @rest) = @_;
 
-	if ($nick eq 'test-3kj469y5h') {
+	my @nicks = split(' ', Irssi::settings_get_str('dimpid_nicks'));
+
+	if (grep($_ eq $nick, @nicks)) {
 		Irssi::signal_continue(
 			$server,
 			ESCAPE . GREY . $text . ESCAPE,
@@ -27,3 +29,6 @@ Irssi::signal_add('message public', sub {
 		);
 	}
 });
+
+
+Irssi::settings_add_str('dimpid', 'dimpid_nicks', '');
