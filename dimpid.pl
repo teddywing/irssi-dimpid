@@ -1,5 +1,15 @@
 # dimpid.pl
 #
+# Outputs public messages from certain nicks in grey instead of standard black.
+#
+# Settings:
+#
+#     dimpid_nicks: a space-separated list of nicks whose public messages will
+#                   be printed in grey.
+#
+#                   Example: /set dimpid_nicks nibbler hermes zoidberg
+#
+#
 # Copyright (c) 2018 Teddy Wing
 #
 # This program is free software: you can redistribute it and/or modify
