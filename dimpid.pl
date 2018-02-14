@@ -12,16 +12,10 @@ our %IRSSI = {
 };
 
 
-use Data::Dumper;
-
-Irssi::theme_register(['dimpid', '%5$0%n']);
-
 Irssi::signal_add('message public', sub {
-	my ($server, $text, $nick, $address, $target) = @_;
-
-	Irssi::print(Dumper($target), MSGLEVEL_CLIENTCRAP);
+	my ($server, $text, $nick, @rest) = @_;
 
 	if ($nick eq 'test-3kj469y5h') {
-		$server->printformat($target, MSGLEVEL_PUBLIC, 'dimpid', $text);
+		Irssi::signal_continue($server, "\x{03}14" . $text . "\x{03}", $nick, @rest);
 	}
 });
