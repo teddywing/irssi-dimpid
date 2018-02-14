@@ -42,6 +42,38 @@ our %IRSSI = {
 use constant ESCAPE => "\x{03}";
 use constant GREY => '14';
 
+
+Irssi::command_bind('help dimpid', sub {
+	my $help = <<HELP;
+
+%9Description:%9
+
+    Outputs public messages from certain nicks in grey instead of standard
+    black.
+
+%9Settings:%9
+
+    dimpid_nicks: a space-separated list of nicks whose public messages will
+                  be printed in grey.
+
+                  %9Example:%9 /set dimpid_nicks nibbler hermes zoidberg
+HELP
+
+	Irssi::print($help, MSGLEVEL_CLIENTCRAP);
+});
+
+Irssi::command_bind('help', sub {
+	my ($data, $server, $item) = @_;
+
+	if ($data !~ /^dimpid\s*$/) {
+		return;
+	}
+
+	Irssi::command_runsub('help', $data, $server, $item);
+	Irssi::signal_stop();
+});
+
+
 Irssi::signal_add('message public', sub {
 	my ($server, $text, $nick, @rest) = @_;
 
