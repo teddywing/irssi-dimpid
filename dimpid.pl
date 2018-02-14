@@ -12,10 +12,18 @@ our %IRSSI = {
 };
 
 
+use constant ESCAPE => "\x{03}";
+use constant GREY => '14';
+
 Irssi::signal_add('message public', sub {
 	my ($server, $text, $nick, @rest) = @_;
 
 	if ($nick eq 'test-3kj469y5h') {
-		Irssi::signal_continue($server, "\x{03}14" . $text . "\x{03}", $nick, @rest);
+		Irssi::signal_continue(
+			$server,
+			ESCAPE . GREY . $text . ESCAPE,
+			$nick,
+			@rest,
+		);
 	}
 });
